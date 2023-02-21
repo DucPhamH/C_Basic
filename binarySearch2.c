@@ -165,7 +165,7 @@ int main() {
             printf("Nhap MSSV: ");
             fflush(stdin);
             scanf("%s", ysearch);
-            int resutl = binarySearch(members, 0, size-1, ysearch);
+            int result = binarySearch(members, 0, size-1, ysearch);
             printf("%d\n", result);
             // search(members, size);
             break;
