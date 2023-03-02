@@ -342,6 +342,28 @@ void writeToFile(struct tree *root, char *fileName) {
   fclose(fp);
 }
 
+void deleteList() {
+   struct node* current = first;
+   struct node* next;
+   while (current != NULL) {
+      next = current->next;
+      free(current);
+      current = next;
+   }
+   first = NULL;
+}
+
+void freeTree(struct tree *root) {
+  if (root == NULL) {
+    return;
+  }
+
+  freeTree(root->left);
+  free(root);
+  freeTree(root->right);
+  
+}
+
 
 int main()
 {
@@ -351,7 +373,7 @@ int main()
     char filename[] = "log_input.txt";
     char filename2[] = "log_persent.txt";
     int i;
-    char filename[] = "log_input.txt";
+    
     while(1){
         printf("Chuong trinh quan li bai xe\nVui long chon mot trong cac chuc nang sau\n[1] Doc du lieu tu file log \n[2] Tra cuu so luong xe gui/lay theo ngay trong qua khu\n[3] Thong tin cac xe trong bai hien tai\n[4] Gui them xe moi\n[5] Tra xe\n[6] Cap nhat Log du lieu\n[7] Luu danh sach xe dang co trong bai ra file\n[8] Thoat\nYour choice (1-8, other to quit): ");
         scanf("%d", &menu);
@@ -403,7 +425,9 @@ int main()
                 writeToFile(root, filename2);
                 break;
 
-            case 8:  
+            case 8: 
+                deleteList(); 
+                freeTree(root);
                 printf("Ban đã thoát chương trình\n");
                 exit(0);
  
